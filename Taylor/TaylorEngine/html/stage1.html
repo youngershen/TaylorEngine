@@ -1,0 +1,40 @@
+<html>
+	<head>
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+		<script type="text/javascript" language="JavaScript" src="./js/Taylor/Taylor.core.js"></script>
+		<script type="text/javascript" language="JavaScript" src="./js/Taylor/Taylor.core.module.js"></script>
+		<script type="text/javascript" language="JavaScript" src="./js/Taylor/Taylor.core.module.Color.js"></script>
+		<script type="text/javascript" language="JavaScript" src="./js/Taylor/Taylor.util.js"></script>
+		<script type="text/javascript" language="JavaScript" src="./js/Taylor/Taylor.animate.js"></script>
+		<script type="text/javascript" language="JavaScript" src="./js/Taylor/Taylor.animate.stage.js"></script>
+		<script>
+			
+			window.onload = function(){
+				
+				var canvas = Taylor.animate.stage.getStage({});
+				ctx = canvas.getContext('2d');
+				 // ctx.lineWidth = 1.5; 
+  			     // ctx.fillRect(0,0,300,300);  
+                 // ctx.translate(150,150); 
+                 // ctx.rotate(Math.PI/4);
+                 // ctx.scale(0.5,0.5);
+                 // ctx.clearRect(-40,-40, 80,80);
+  
+				var callback = function(){
+					
+					//alert('ctx');
+					ctx.fillStyle = '#09F';
+					alert(canvas.height);
+					ctx.fillRect(0, 0, canvas.height, canvas.width);
+					
+						
+				}
+				
+				Taylor.animate.stage.stageControl(ctx,function(){ callback() });
+			}
+			
+			
+		</script>
+	</head>
+	<body></body>
+</html>
