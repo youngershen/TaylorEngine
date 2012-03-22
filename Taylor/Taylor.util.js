@@ -51,12 +51,31 @@
                 jsDomObject.setAttribute('type',type);
                 jsDomObject.setAttribute('language',language);
                 jsDomObject.setAttribute('src',src);
+             
+                jsDomObject.exist = false;
+             jsDomObject.onload = jsDomObject.onreadystatechange = function(){
+                 
+                  if(!this.readyState||this.readyState=='loaded'||this.readyState=='complete'){  
+
+                        jsDomObject.exist = true;                        
+                  }
+             };
             return jsDomObject;
      }; 
     
-    Taylor.util.loadJSFromFile = function(fileName){
+    Taylor.util.loadJSFromFile = function(url,id){
         
-        
-        
+        var jsDom = Taylor.util.createJSDomObject({
+            
+                src:url || $.debug('load error'),
+                id:id || null
+        });
+        //document.body.appendChild(jsDom);
+        $.debug(jsDom.exist);
+        oHead = document.getElementsByTagName("HEAD").item(0); 
+        oHead.appendChild(jsDom);
+        $.debug(jsDom.getAttribute('src'));
+       
+        return jsDom;
     };
 })();

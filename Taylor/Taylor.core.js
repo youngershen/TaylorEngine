@@ -10,23 +10,41 @@ window.Taylor = Taylor;
     Taylor.core.s = function(){
         
     };
+    
+    $.ready = function(method){
+        
+        window.onload = function(){
+            
+            method();
+        }
+        
+    }
 
-    Taylor.core.init = function(){
+    Taylor.core.init = function(configuration){
         
         if(!window.Taylor){
             
             window['Taylor'] = Taylor;
         }
         
+        if(arguments.length == 0){
+            
+            //no loaded js initlization mehtod
+            
+        }else{
+            // loded js then initlization method
+            
+            
+            
+        }
+        
     };
     
     Taylor.core.__dynamicLoadSource__ = function(args){
         
-        var argArray =new Array();
         for(var i in args){
             
-            argArray.push(arguments[i])
-        
+            Taylor.core.loadJSFromFile("/js/Taylor/"+args[i]);
         }    
     
     };
@@ -60,5 +78,31 @@ window.Taylor = Taylor;
           console.log("["+date+"]"+logInfo);
     };
 
-
+     Taylor.core.createJSDomObject = function(jsConfig){
+         
+            var id       = jsConfig['id'] || 'js',
+                type     = jsConfig['type'] || 'text/javascript',
+                language = jsConfig['language'] || 'JavaScript',
+                src      = jsConfig['src'] || $.debug('init js domObject error')
+            
+            var jsDomObject = document.createElement("script");
+                jsDomObject.setAttribute('id',id);
+                jsDomObject.setAttribute('type',type);
+                jsDomObject.setAttribute('language',language);
+                jsDomObject.setAttribute('src',src);
+            return jsDomObject;
+     }; 
+    
+    Taylor.core.loadJSFromFile = function(fileName){
+        
+        var jsDom = Taylor.core.createJSDomObject({
+            
+                src:fileName
+        });
+        document.body.appendChild(jsDom);
+        $.debug(jsDom.getAttribute('src'));
+    };
+    
+    
+    
 })();
